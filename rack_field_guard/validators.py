@@ -111,8 +111,9 @@ class RackFieldWriteGuard(CustomValidator):
         disallowed = changed - set(allowed_cf_set)
         if disallowed:
             allowed_list = ", ".join(sorted(allowed_cf_set)) or "<none>"
-            bad_list = ", ".join(sorted(disallowed))
-            # Do not bind to a non-existent form field; raise as a non-field error
-            self.fail(
-                f"RFG-CF-DENIED: Disallowed custom field changes: {bad_list}. Allowed: {allowed_list}"
-            )
+            # Attach errors to each specific custom field input for inline display
+            for slug in sorted(disallowed):
+                self.fail(
+                    f"RFG-CF-DENIED: Modifying custom field '{slug}' is not permitted. Allowed: {allowed_list}",
+                    field=f"cf_{slug}",
+                )
