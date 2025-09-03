@@ -32,9 +32,10 @@ class RackFieldGuardConfig(PluginConfig):
         # Map available groups and CF slugs
         existing_groups = set(Group.objects.values_list("name", flat=True))
         ct = ContentType.objects.get_for_model(Rack)
+        # NetBox 4.x uses `object_types` M2M to ContentType and stores keys under `name`
         existing_cf_slugs = set(
-            CustomField.objects.filter(content_types=ct).values_list("key", flat=True)
-        ) or set(CustomField.objects.filter(content_types=ct).values_list("name", flat=True))
+            CustomField.objects.filter(object_types=ct).values_list("name", flat=True)
+        )
 
         for idx, rule in enumerate(rules):
             group_name = (rule or {}).get("group_name")
