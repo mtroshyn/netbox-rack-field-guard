@@ -9,12 +9,29 @@ homepage = "https://github.com/mtroshyn/netbox-rack-field-guard"
 keywords = ["netbox", "permissions", "rack"]
 license = "MIT"
 packages = [{ include = "rack_field_guard" }]
+classifiers = [
+  "Framework :: Django",
+  "Framework :: Django :: 4",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+include = [
+  { path = "README.md", format = "sdist" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 
 [tool.poetry.plugins."netbox.plugins"]
 rack_field_guard = "rack_field_guard:config"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+pytest-mock = "^3.14.0"
 
 [build-system]
 requires = ["poetry-core>=1.6.0"]
