@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "rack-field-guard"
+version = "0.1.0"
+description = "NetBox plugin to restrict Rack edits to a specific custom field for a specific group"
+authors = ["Maksym Troshyn <maksym.troshyn@advanced.host>"]
+readme = "README.md"
+repository = "https://github.com/mtroshyn/netbox-rack-field-guard"
+homepage = "https://github.com/mtroshyn/netbox-rack-field-guard"
+keywords = ["netbox", "permissions", "rack"]
+license = "MIT"
+packages = [{ include = "rack_field_guard" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.plugins."netbox.plugins"]
+rack_field_guard = "rack_field_guard:config"
+
+[build-system]
+requires = ["poetry-core>=1.6.0"]
+build-backend = "poetry.core.masonry.api"
