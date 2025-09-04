@@ -20,6 +20,7 @@ license = "MIT"
 packages = [{ include = "rack_field_guard" }]
 include = [
   { path = "README.md", format = "sdist" },
+  { path = "LICENSE", format = "sdist" },
 ]
 
 [tool.poetry.dependencies]
@@ -27,6 +28,11 @@ python = "^3.10"
 
 [tool.poetry.plugins."netbox.plugins"]
 rack_field_guard = "rack_field_guard:config"
+
+[tool.poetry.urls]
+Homepage = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
+Repository = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
+Documentation = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.0"

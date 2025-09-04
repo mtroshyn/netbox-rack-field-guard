@@ -10,7 +10,8 @@ class RackFieldGuardConfig(PluginConfig):
     version = "0.1.0"
     author = "Maksym Troshyn"
     author_email = "maksym.troshyn@advanced.host"
-    base_url = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
+    # base_url must be a URL path segment used for this plugin's routes, not a homepage URL
+    base_url = "rack-field-guard"
     min_version = "4.0.0"
     max_version = "4.3"
     required_settings = ("RULES",)
