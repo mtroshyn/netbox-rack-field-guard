@@ -1,30 +1,23 @@
+[build-system]
+requires = ["poetry-core>=1.6.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "rack-field-guard"
-version = "0.1.0"
+version = "0.0.0" # the correct value will be set in CI pipeline
 description = "NetBox plugin to restrict Rack edits to a specific custom field for a specific group"
-authors = ["Maksym Troshyn <maksym.troshyn@advanced.host>"]
+authors = [
+  {name = "Maksym Troshyn", email = "maksym.troshyn@advanced.host"}
+  ]
+maintainers = [
+  {name = "Maksym Troshyn", email = "maksym.troshyn@advanced.host"}
+  ]
 readme = "README.md"
-repository = "https://github.com/mtroshyn/netbox-rack-field-guard"
-homepage = "https://github.com/mtroshyn/netbox-rack-field-guard"
+repository = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
+homepage = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
 keywords = ["netbox", "permissions", "rack"]
 license = "MIT"
 packages = [{ include = "rack_field_guard" }]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Framework :: Django",
-  "Framework :: Django :: 4",
-  "Intended Audience :: System Administrators",
-  "License :: OSI Approved :: MIT License",
-  "Operating System :: OS Independent",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Topic :: System :: Systems Administration",
-  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-]
 include = [
   { path = "README.md", format = "sdist" },
 ]
@@ -43,9 +36,11 @@ black = "^24.0.0"
 flake8 = "^7.0.0"
 mypy = "^1.8.0"
 
-[build-system]
-requires = ["poetry-core>=1.6.0"]
-build-backend = "poetry.core.masonry.api"
+[[tool.poetry.source]]
+name = "ahback"
+url = "https://nexus-private.ahback.com/repository/pypi/"
+priority = "primary"
+
 
 [tool.black]
 line-length = 88
