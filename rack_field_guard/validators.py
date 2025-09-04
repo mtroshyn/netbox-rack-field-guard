@@ -3,6 +3,7 @@ from dcim.models import Rack
 from extras.validators import CustomValidator
 from typing import Iterable, Dict, Any, Optional, Set
 
+
 def _cfg():
     return getattr(settings, "PLUGINS_CONFIG", {}).get("rack_field_guard", {})
 
@@ -24,9 +25,17 @@ def _validate_rules(rules: Any) -> Optional[str]:
     for idx, rule in enumerate(rules):
         if not isinstance(rule, dict):
             return f"RULES[{idx}] must be an object."
-        if "group_name" not in rule or not isinstance(rule["group_name"], str) or not rule["group_name"].strip():
+        if (
+            "group_name" not in rule
+            or not isinstance(rule["group_name"], str)
+            or not rule["group_name"].strip()
+        ):
             return f"RULES[{idx}].group_name must be a non-empty string."
-        if "allowed_cf" not in rule or not isinstance(rule["allowed_cf"], Iterable) or isinstance(rule["allowed_cf"], (str, bytes)):
+        if (
+            "allowed_cf" not in rule
+            or not isinstance(rule["allowed_cf"], Iterable)
+            or isinstance(rule["allowed_cf"], (str, bytes))
+        ):
             return f"RULES[{idx}].allowed_cf must be a list of custom field slugs."
     return None
 
@@ -42,6 +51,7 @@ def _get_allowed_cf_for_user(rules: Iterable[Dict[str, Any]], user) -> Set[str]:
         if group_name in user_group_names:
             allowed.update([str(slug) for slug in rule.get("allowed_cf", [])])
     return allowed
+
 
 class RackFieldWriteGuard(CustomValidator):
     """
@@ -80,7 +90,9 @@ class RackFieldWriteGuard(CustomValidator):
 
         # On create: deny by default; adjust if creation should be allowed
         if instance.pk is None:
-            self.fail("RFG-CREATE-DENIED: Creation of racks is not permitted for this user's group.")
+            self.fail(
+                "RFG-CREATE-DENIED: Creation of racks is not permitted for this user's group."
+            )
             return
 
         # Load original for diff
@@ -88,7 +100,9 @@ class RackFieldWriteGuard(CustomValidator):
             original = Rack.objects.get(pk=instance.pk)
         except Rack.DoesNotExist:
             # If we can't load original, be conservative and block
-            self.fail("RFG-ORIGINAL-NOT-FOUND: Original Rack instance not found for validation.")
+            self.fail(
+                "RFG-ORIGINAL-NOT-FOUND: Original Rack instance not found for validation."
+            )
             return
 
         # Deny any change outside custom_field_data
@@ -98,12 +112,17 @@ class RackFieldWriteGuard(CustomValidator):
             if name in excluded:
                 continue
             if getattr(instance, name) != getattr(original, name):
-                self.fail("RFG-BUILTIN-DENIED: Modifying built-in Rack fields is not permitted for your group.", field=name)
+                self.fail(
+                    "RFG-BUILTIN-DENIED: Modifying built-in Rack fields is not permitted for your group.",
+                    field=name,
+                )
 
         # Only allow configured custom fields to change
         old_cfd = original.custom_field_data or {}
         new_cfd = instance.custom_field_data or {}
-        changed = {k for k in set(old_cfd) | set(new_cfd) if old_cfd.get(k) != new_cfd.get(k)}
+        changed = {
+            k for k in set(old_cfd) | set(new_cfd) if old_cfd.get(k) != new_cfd.get(k)
+        }
 
         if not changed:
             return
