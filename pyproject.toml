@@ -7,10 +7,10 @@ name = "rack-field-guard"
 version = "0.0.0" # the correct value will be set in CI pipeline
 description = "NetBox plugin to restrict Rack edits to a specific custom field for a specific group"
 authors = [
-  {name = "Maksym Troshyn", email = "maksym.troshyn@advanced.host"}
+  { name = "Maksym Troshyn", email = "maksym.troshyn@advanced.host" }
   ]
 maintainers = [
-  {name = "Maksym Troshyn", email = "maksym.troshyn@advanced.host"}
+  { name = "Maksym Troshyn", email = "maksym.troshyn@advanced.host" }
   ]
 readme = "README.md"
 repository = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
