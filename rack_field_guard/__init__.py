@@ -10,9 +10,9 @@ class RackFieldGuardConfig(PluginConfig):
     version = "0.1.0"
     author = "Maksym Troshyn"
     author_email = "maksym.troshyn@advanced.host"
-    min_version = "4.0"
+    base_url = "https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard"
+    min_version = "4.0.0"
     max_version = "4.3"
-    base_url = "rack-field-guard"
     required_settings = ("RULES",)
     default_settings = {
         "RULES": [],
