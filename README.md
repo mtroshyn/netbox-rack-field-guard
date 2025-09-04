@@ -1,6 +1,6 @@
 ## What this plugin is for
 
-Restrict which custom fields users can edit on `dcim.Rack`, based on their Django group membership. Members of configured groups can modify only the specified custom fields; all built-in Rack fields and any other custom fields are denied.
+Restrict which custom fields users can edit on `dcim.Rack` netbox object, based on their netbox group membership. Members of configured groups can modify only the specified custom fields; all built-in Rack fields and any other custom fields are denied.
 
 ## Why this plugin was created (and alternatives)
 
@@ -8,7 +8,6 @@ Restrict which custom fields users can edit on `dcim.Rack`, based on their Djang
 - **Alternatives**:
   - **Custom Scripts / Jobs**: Create a controlled job to update only the allowed field(s) and deny `change` permission on the model. Secure and simple, but the UX detours from the standard edit form.
   - **Permission Constraints**: Limit which objects can be changed, not which fields.
-  - **Client-side UI tweaks**: Not secure by themselves (must be enforced server-side).
 
 This plugin leverages request-aware custom validation to enforce per-field edit rules on both the UI and the REST API.
 
@@ -26,8 +25,8 @@ This plugin leverages request-aware custom validation to enforce per-field edit 
 
 1) Install the package (choose one):
 
-- From Git (main branch):
-  - `pip install "git+https://github.com/mtroshyn/netbox-rack-field-guard@main"`
+- From AH nexus pypi repo, instructions here https://nexus-private.ahback.com/repository/readthedocs/hipanel-integration/install.html#install-from-pypi-repository:
+  - `pip install rack-field-guard"`
 
 2) Enable plugin in NetBox configuration (`configuration.py`):
 ```
@@ -68,7 +67,7 @@ CUSTOM_VALIDATORS = {
 
 ```bash
 # Clone the repository
-git clone https://github.com/mtroshyn/netbox-rack-field-guard.git
+git clone https://git.ahback.com/intit/netbox/plugins/netbox-rack-field-guard
 cd netbox-rack-field-guard
 
 # Install dependencies
