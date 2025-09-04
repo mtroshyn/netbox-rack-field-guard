@@ -11,7 +11,7 @@ class RackFieldGuardConfig(PluginConfig):
     author = "Maksym Troshyn"
     author_email = "maksym.troshyn@advanced.host"
     min_version = "4.0"
-    max_version = "4.2"
+    max_version = "4.3"
     base_url = "rack-field-guard"
     required_settings = ("RULES",)
     default_settings = {
